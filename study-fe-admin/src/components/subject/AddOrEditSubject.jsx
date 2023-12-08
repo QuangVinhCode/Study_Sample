@@ -1,76 +1,111 @@
 import React, { Component } from "react";
 import withRouter from "../../helpers/withRouter";
-import { Col, Divider, Row, Form, Input, Button, Popconfirm } from "antd";
+import {
+  Col,
+  Divider,
+  Row,
+  Form,
+  Input,
+  Button,
+  Select,
+  Popconfirm,
+} from "antd";
 import ContentHeader from "../common/ContentHeader";
 import {
-  insertClass,
-  getClass,
-  clearClass,
-  updateClass,
-} from "../../redux/actions/classAction";
+  insertSubject,
+  getSubject,
+  clearSubject,
+  updateSubject,
+} from "../../redux/actions/subjectAction";
+import { getClasses } from "../../redux/actions/classAction";
 import { connect } from "react-redux";
-class AddOrEditClass extends Component {
+const { Option } = Select;
+class AddOrEditSubject extends Component {
   formRef = React.createRef();
   constructor(props) {
     super(props);
 
     this.state = {
-      object: { id: "", classname: "" },
+      subject: {
+        id: "",
+        subjecttitle: "",
+        classInfo: {
+          id: "",
+        },
+      },
     };
   }
   componentDidMount = () => {
+    this.props.getClasses();
     if (this.props.router.params.id) {
-      this.props.getClass(this.props.router.params.id);
+      this.props.getSubject(this.props.router.params.id);
     } else {
-      this.props.clearClass();
+      this.props.clearSubject();
     }
   };
 
   static getDerivedStateFromProps(nextProps, prevState) {
     // Kiểm tra xem nextProps có object không và object có thay đổi không
-    if (nextProps.object && prevState.object.id !== nextProps.object.id) {
+    if (nextProps.subject && prevState.subject.id !== nextProps.subject.id) {
       // Nếu có thay đổi, cập nhật state với dữ liệu từ nextProps.object
       return {
         ...prevState,
-        object: nextProps.object,
+        subject: nextProps.subject,
       };
-    } else if (!nextProps.object) {
+    } else if (!nextProps.subject) {
       // Nếu không có nextProps.object, reset state với giá trị mặc định
       return {
         ...prevState,
-        object: { id: "", classname: "" },
+        subject: {
+          id: "",
+          subjecttitle: "",
+          classInfo: {
+            id: "",
+          },
+        },
       };
     }
     // Không cần cập nhật state
     return null;
   }
   confirmUpdate = () => {
-    console.log("Cập nhật  lớp");
+    console.log("Cập nhật  môn học");
     this.formRef.current.submit();
   };
 
   onSubmitForm = (values) => {
+    console.log("values in onSubmitForm");
     console.log(values);
 
     const { navigate } = this.props.router;
-    const { id } = this.state.object;
+    const { id } = this.state.subject;
     //this.state.object.id
+
+    const payload = {
+      id: id, // Use null for new items, and the actual ID for updates
+      subjecttitle: values.subjecttitle,
+      classInfo: {
+        id: values.class_id,
+      },
+    };
+    console.log("payload");
+    console.log(payload);
     if (!id) {
-      this.props.insertClass(values, navigate);
+      this.props.insertSubject(payload, navigate);
     } else {
-      this.props.updateClass(id, values, navigate);
+      this.props.updateSubject(id, payload, navigate);
     }
   };
 
   render() {
     const { navigate } = this.props.router;
     const { isLoading } = this.props;
-    const { object } = this.state;
-    console.log("oject in this.state:");
-    console.log(object);
-    let title = "Thêm lớp mới";
-    if (object.id) {
-      title = "Cập nhật lớp";
+    const { subject } = this.state;
+    const { classes } = this.props;
+
+    let title = "Thêm môn học mới";
+    if (subject.id) {
+      title = "Cập nhật môn học";
     }
     return (
       <div>
@@ -84,29 +119,38 @@ class AddOrEditClass extends Component {
           layout="vertical"
           className="form"
           onFinish={this.onSubmitForm}
-          key={object.id}
+          key={subject.id}
           ref={this.formRef}
         >
           <Row>
             <Col md={12}>
-              <Form.Item
-                label="Mã lớp"
-                name="class_id"
-                initialValue={object.id}
-              >
+              <Form.Item label="Mã môn học" name="id" initialValue={subject.id}>
                 <Input readOnly></Input>
               </Form.Item>
               <Form.Item
-                label="Tên lớp"
-                name="classname"
-                initialValue={object.classname}
+                label="Tên môn học"
+                name="subjecttitle"
+                initialValue={subject.subjecttitle}
                 rules={[{ required: true, min: 2 }]}
               >
                 <Input></Input>
               </Form.Item>
-
+              <Form.Item
+                label="Lớp học"
+                name="class_id"
+                initialValue={subject.classInfo ? subject.classInfo.id : undefined} // Assuming 'classInfo' contains the class information
+                rules={[{ required: true, message: "Please select a class" }]}
+              >
+                <Select placeholder="Chọn môn học">
+                  {classes.map((classItem) => (
+                    <Option key={classItem.id} value={classItem.id}>
+                      {classItem.classname}
+                    </Option>
+                  ))}
+                </Select>
+              </Form.Item>
               <Divider></Divider>
-              {!object.id && (
+              {!subject.id && (
                 <Button
                   htmlType="submit"
                   type="primary"
@@ -116,7 +160,7 @@ class AddOrEditClass extends Component {
                   Thêm mới
                 </Button>
               )}
-              {object.id && (
+              {subject.id && (
                 <Popconfirm
                   title="Bạn muốn cập nhật không ?"
                   onConfirm={this.confirmUpdate}
@@ -142,17 +186,19 @@ class AddOrEditClass extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  object: state.classReducer.object,
+  subject: state.subjectReducer.subject,
+  classes: state.classReducer.objects,
   isLoading: state.commonReducer.isLoading,
 });
 
 const mapDispatchToProps = {
-  insertClass,
-  getClass,
-  clearClass,
-  updateClass,
+  insertSubject,
+  getSubject,
+  clearSubject,
+  updateSubject,
+  getClasses,
 };
 
 export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(AddOrEditClass)
+  connect(mapStateToProps, mapDispatchToProps)(AddOrEditSubject)
 );

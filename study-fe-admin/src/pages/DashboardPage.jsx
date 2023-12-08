@@ -23,6 +23,8 @@ import AddOrEditClass from "../components/classes/AddOrEditClass";
 import ListClass from "../components/classes/ListClass";
 import { useDispatch, useSelector } from "react-redux";
 import { setError, setMessage } from "../redux/actions/commonAction";
+import ListSubject from "../components/subject/ListSubject";
+import AddOrEditSubject from "../components/subject/AddOrEditSubject";
 const { Header, Sider, Content } = Layout;
 
 function DashboardPage() {
@@ -106,11 +108,13 @@ function DashboardPage() {
                   key: "31",
                   icon: <MdFormatListBulleted />,
                   label: "Danh sách môn học",
+                  onClick: () => navigate("/subjects/list"),
                 },
                 {
                   key: "32",
                   icon: <MdAddCircleOutline />,
                   label: "Thêm môn học",
+                  onClick: () => navigate("/subjects/add"),
                 },
               ],
             },
@@ -241,12 +245,22 @@ function DashboardPage() {
               ></Route>
               <Route
                 path="/classes/update/:id"
-                element={<AddOrEditClass key="u"/>}
+                element={<AddOrEditClass key="u" />}
               ></Route>
               <Route path="/classes/list" element={<ListClass />}></Route>
+              <Route
+                path="/subjects/add"
+                element={<AddOrEditSubject key="a" />}
+              ></Route>
+              <Route
+                path="/subjects/update/:id"
+                element={<AddOrEditSubject key="u" />}
+              ></Route>
+              <Route path="/subjects/list" element={<ListSubject />}></Route>
             </Routes>
 
             <Outlet></Outlet>
+            
           </div>
         </Content>
       </Layout>
