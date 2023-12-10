@@ -12,7 +12,7 @@ import java.io.Serializable;
 public class SubjectDto implements Serializable {
     Long id;
 
-    @NotEmpty(message = "Tên lớp học không được để trống")
+    @NotEmpty(message = "Tên môn học không được để trống")
     String subjecttitle;
 
     ClassDto classInfo;

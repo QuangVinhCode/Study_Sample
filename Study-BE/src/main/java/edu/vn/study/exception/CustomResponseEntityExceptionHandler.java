@@ -13,9 +13,27 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(ClassException.class)
     public final ResponseEntity<Object> handleClassException(ClassException ex, WebRequest request){
-        ClassExceptionResponse classExceptionResponse = new ClassExceptionResponse(ex.getMessage());
+        ClassExceptionResponse exceptionResponse = new ClassExceptionResponse(ex.getMessage());
 
-        return  new ResponseEntity<>(classExceptionResponse, HttpStatus.BAD_REQUEST);
+        return  new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
+    }
+    @ExceptionHandler(FileNotFoundException.class)
+    public final ResponseEntity<Object> handleFileNotFoundException(FileNotFoundException ex, WebRequest request){
+        ExceptionResponse exceptionResponse = new ExceptionResponse(ex.getMessage());
+
+        return  new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
+    }
+    @ExceptionHandler(FileStorageException.class)
+    public final ResponseEntity<Object> handleFileStorageException(FileStorageException ex, WebRequest request){
+        ExceptionResponse exceptionResponse = new ExceptionResponse(ex.getMessage());
+
+        return  new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(LessonException.class)
+    public final ResponseEntity<Object> handleLessonException(LessonException ex, WebRequest request){
+        ExceptionResponse exceptionResponse = new ExceptionResponse(ex.getMessage());
+
+        return  new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
+    }
 }

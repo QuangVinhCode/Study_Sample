@@ -1,5 +1,6 @@
 package edu.vn.study.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,8 +32,15 @@ public class Lesson {
     private Subject subject;
 
     @OneToMany(mappedBy = "lesson", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Exercise> exercises;
 
     @OneToMany(mappedBy = "lesson")
+    @JsonIgnore
     private List<AccountJoinLesson> joinedAccounts;
+
+    public void setSubjectById(Long subjectId) {
+        this.subject = new Subject();
+        this.subject.setId(subjectId);
+    }
 }

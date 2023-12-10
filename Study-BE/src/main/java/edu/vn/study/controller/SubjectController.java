@@ -66,7 +66,7 @@ public class SubjectController {
     public ResponseEntity<?> updateSubject(@PathVariable("id") Long id, @RequestBody SubjectDto dto){
         Subject existingSubject = subjectService.findById(id);
         if (existingSubject == null) {
-            return new ResponseEntity<>("Subject with id " + id + " not found", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("Môn học với id " + id + " không tìm thấy", HttpStatus.NOT_FOUND);
         }
 
         // Copy properties from DTO to existing entity
@@ -77,7 +77,7 @@ public class SubjectController {
             // Fetch the existing Class entity by ID
             Class existingClass = classService.findById(dto.getClassInfo().getId());
             if (existingClass == null) {
-                return new ResponseEntity<>("Class with id " + dto.getClassInfo().getId() + " not found", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("Lớp với id " + dto.getClassInfo().getId() + " không tìm thấy", HttpStatus.NOT_FOUND);
             }
 
             // Set the existing Class entity to the Subject
