@@ -31,7 +31,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin
 @RequestMapping("/api/v1/lessons")
 public class LessonController {
 
@@ -51,7 +51,7 @@ public class LessonController {
             MediaType.MULTIPART_FORM_DATA_VALUE},
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> createLesson(@Valid @ModelAttribute LessonDto dto, BindingResult result){
-
+        System.out.println(dto);
         ResponseEntity<?> responseEntity = mapValidationErrorService.mapValidationFields(result);
         if (responseEntity != null) {
             return responseEntity;
@@ -61,9 +61,7 @@ public class LessonController {
         Lesson createdLesson = lessonService.save(dto);
         dto.setId(createdLesson.getId());
         dto.setLessonname(createdLesson.getLessonname());
-        SubjectDto subjectDto = new SubjectDto();
-        subjectDto.setId(createdLesson.getId());
-
+        dto.setLessoncontent(createdLesson.getLessoncontent());
         return new ResponseEntity<>(dto, HttpStatus.CREATED);
     }
 
@@ -103,14 +101,14 @@ public class LessonController {
         if (responseEntity != null) {
             return responseEntity;
         }
-
+        System.out.println("id:" + id);
+        System.out.println("dto:" + dto);
         // Save the new Subject entity
         Lesson createdLesson = lessonService.update(id,dto);
 
         dto.setId(createdLesson.getId());
         dto.setLessonname(createdLesson.getLessonname());
-        SubjectDto subjectDto = new SubjectDto();
-        subjectDto.setId(createdLesson.getId());
+        dto.setLessoncontent(createdLesson.getLessoncontent());
 
         return new ResponseEntity<>(dto, HttpStatus.CREATED);
     }

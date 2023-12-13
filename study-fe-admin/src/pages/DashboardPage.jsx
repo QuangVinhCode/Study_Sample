@@ -25,6 +25,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setError, setMessage } from "../redux/actions/commonAction";
 import ListSubject from "../components/subject/ListSubject";
 import AddOrEditSubject from "../components/subject/AddOrEditSubject";
+import ListLessons from "../components/lessons/ListLessons";
 const { Header, Sider, Content } = Layout;
 
 function DashboardPage() {
@@ -122,18 +123,7 @@ function DashboardPage() {
               key: "4",
               icon: <MdOutlinePlayLesson />,
               label: "Bài học",
-              children: [
-                {
-                  key: "41",
-                  icon: <MdFormatListBulleted />,
-                  label: "Danh sách bài học",
-                },
-                {
-                  key: "42",
-                  icon: <MdAddCircleOutline />,
-                  label: "Thêm bài học",
-                },
-              ],
+              onClick: () => navigate("/lessons/list"),
             },
             {
               key: "5",
@@ -257,10 +247,10 @@ function DashboardPage() {
                 element={<AddOrEditSubject key="u" />}
               ></Route>
               <Route path="/subjects/list" element={<ListSubject />}></Route>
+              <Route path="/lessons/list" element={<ListLessons />}></Route>
             </Routes>
 
             <Outlet></Outlet>
-            
           </div>
         </Content>
       </Layout>

@@ -25,6 +25,8 @@ public class LessonService {
     @Autowired
     private FileStorageService fileStorageService;
 
+    @Autowired
+    SubjectService subjectService;
     public Lesson save(LessonDto dto) {
         List<?> foundedList = lessonRepository.findByLessonnameContainsIgnoreCase(dto.getLessonname());
 
@@ -32,14 +34,20 @@ public class LessonService {
         {
             throw  new LessonException("Bài học đã tồn tại trong hệ thống");
         }
-
+        Subject subject = subjectService.findById(dto.getSubject().getId());
         Lesson entity = new Lesson();
 
-        BeanUtils.copyProperties(dto,entity);
+        //BeanUtils.copyProperties(dto,entity);
+
+        entity.setLessonname(dto.getLessonname());
+        entity.setLessoncontent(dto.getLessoncontent());
+        entity.setSubject(subject);
+
 
         if (dto.getPdfFile() != null)
         {
             String filename = fileStorageService.storePDFFile(dto.getPdfFile());
+
 
             entity.setLessoncontent(filename);
             dto.setPdfFile(null);
@@ -80,9 +88,14 @@ public class LessonService {
             throw  new LessonException("Không tìm thấy bài học");
         }
 
+        Subject subject = subjectService.findById(dto.getSubject().getId());
         Lesson entity = new Lesson();
 
-        BeanUtils.copyProperties(dto,entity);
+        //BeanUtils.copyProperties(dto,entity);
+        entity.setId(dto.getId());
+        entity.setLessonname(dto.getLessonname());
+        entity.setLessoncontent(dto.getLessoncontent());
+        entity.setSubject(subject);
 
         if (dto.getPdfFile() != null)
         {
