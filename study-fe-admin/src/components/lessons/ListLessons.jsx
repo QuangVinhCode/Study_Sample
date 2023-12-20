@@ -13,6 +13,7 @@ import {
   deleteLesson,
   updateLesson,
 } from "../../redux/actions/lessonAction";
+import LessonDetails from "./LessonDetails";
 class ListLessons extends Component {
   constructor(props) {
     super(props);
@@ -25,6 +26,7 @@ class ListLessons extends Component {
         lessoncontent: "",
         subject: { id: "" },
       },
+      details: false,
     };
   }
   componentDidMount = () => {
@@ -67,10 +69,13 @@ class ListLessons extends Component {
   onEdit = (value) => {
     this.setState({ ...this.state, lesson: value,open:true });
   };
-
+  onDetails = (value) => {
+    this.setState({ ...this.state, lesson: value ,details: true});
+  }
   render() {
     const { navigate } = this.props.router;
     const { open } = this.state;
+    const { details } = this.state;
     const { lessons } = this.props;
     return (
       <>
@@ -96,13 +101,25 @@ class ListLessons extends Component {
           dataSource={lessons}
           onDeleteConfirm={this.onDeleteConfirm}
           onEdit={this.onEdit}
+          onDetails={this.onDetails}
         />
+        {this.state.details && (
+          <LessonDetails
+            lesson={this.state.lesson}
+            open={details}
+            onCancel={() => {
+            this.setState({ ...this.state,lesson: {}, details: false });
+            
+          }}
+          />
+        )}
         <LessonForm
           lesson={this.state.lesson}
           open={open}
           onCreate={this.onCreate}
           onCancel={() => {
-            this.setState({ ...this.state, open: false });
+            this.setState({ ...this.state,lesson: {}, open: false });
+            
           }}
         />
       </>

@@ -6,12 +6,12 @@ export default class LessonService {
     let formData = new FormData()
 
     formData.append("lessonname",object.lessonname)
-    formData.append("subject.id", object.subject.id);
+    formData.append("subject.id", object.subject_id);
     if (object.lessoncontent[0].originFileObj)
     {
         formData.append("pdfFile",object.lessoncontent[0].originFileObj)
     }
-
+    console.log("object in originFileObj: ",object.lessoncontent[0].originFileObj);
     return await axios.post(API_LESSON, formData);
   };
   getLessons = async () => {
@@ -27,12 +27,12 @@ export default class LessonService {
     let formData = new FormData()
 
     formData.append("lessonname",object.lessonname)
-    formData.append("subject.id", object.subject.id);
+    formData.append("subject.id", object.subject_id);
     if (object.lessoncontent[0].originFileObj)
     {
         formData.append("pdfFile",object.lessoncontent[0].originFileObj)
     }
-
+    console.log("object in originFileObj: ",object.lessoncontent[0].originFileObj);
     return await axios.patch(API_LESSON + "/" + id, formData);
   };
   static getLessonPDFUrl = (filename) => {

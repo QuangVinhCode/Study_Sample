@@ -45,6 +45,7 @@ class LessonForm extends Component {
   }
 
   handlePreview = (file) => {
+    console.log("object in before file pdf");
     console.log(file);
     if (file.thumbUrl) {
       this.setState({
@@ -56,8 +57,8 @@ class LessonForm extends Component {
   };
 
   handleRemove = (value) => {
-    console.log("object");
-    console.log(value);
+    console.log("object in upload pdf");
+    return false;
   };
 
   normFile = (e) => {
@@ -67,7 +68,8 @@ class LessonForm extends Component {
     if (e.fileList.length > 1) {
       return [e.fileList[1]];
     }
-
+    const originalFileObj = e.fileList[0].originFileObj;
+    console.log('Original File Object:', originalFileObj);
     return e && e.fileList;
   };
 
@@ -85,33 +87,36 @@ class LessonForm extends Component {
     const { open, onCreate, onCancel } = this.props;
     const { lesson } = this.props;
     const { subjects } = this.props;
-    const pdfUrl = LessonService.getLessonPDFUrl(lesson.lessoncontent);
-    const initialPDF = { url: pdfUrl, uid: lesson.lessoncontent };
     let title = "Thêm bài học";
     let okText = "Thêm";
     if (lesson.id) {
       title = "Cập nhật bài học";
       okText = "Sửa";
     }
+    const pdfUrl = LessonService.getLessonPDFUrl(lesson.lessoncontent);
+    const initialPDF = {
+      url: pdfUrl,
+      uid: lesson.lessoncontent,
+    };
     return (
       <Modal
         open={open}
         title={title}
         okText={okText}
         cancelText="Hủy"
-        onCancel={onCancel}
+        onCancel={() => {
+          this.form.current.resetFields();  // Reset form fields
+          onCancel();
+        }}
         onOk={() => {
           this.form.current
             .validateFields()
             .then((values) => {
               this.form.current.resetFields();
-              const lessonData = {
-                id: values.id,
-                lessonname: values.lessonname,
-                lessoncontent: values.lessoncontent,
-                subject: { id: values.subject_id },
-              };
-              onCreate(lessonData);
+          
+              console.log("-------object in values form--------");
+              console.log(values);
+              onCreate(values);
             })
             .catch((info) => {
               console.log("Validate Failed:", info);
@@ -125,7 +130,7 @@ class LessonForm extends Component {
           initialValues={{
             modifier: "public",
           }}
-          key={"f"+lesson.id + lesson.lessonname}
+          key={"f" + lesson.id}
         >
           <Form.Item label="Mã bài học" name="id" initialValue={lesson.id}>
             <Input readOnly></Input>
@@ -146,7 +151,7 @@ class LessonForm extends Component {
             <Select onChange={this.handleSubjectChange}>
               {subjects.map((subject) => (
                 <Option key={subject.id} value={subject.id}>
-                  {subject.subjecttitle}
+                  {subject.subjecttitle + " " + subject.classInfo.classname}
                 </Option>
               ))}
             </Select>
@@ -155,11 +160,12 @@ class LessonForm extends Component {
             label="Nội dung file PDF"
             name="lessoncontent"
             initialValue={[initialPDF]}
-            valuePropName="lifeList"
+            valuePropName="fileList"
+            rules={[{ required: true }]}
             getValueFromEvent={this.normFile}
           >
-            <Upload
-              listType="picture"
+            <Upload       
+              listType="text"
               onPreview={this.handlePreview}
               onRemove={this.handleRemove}
               accept=".pdf"
@@ -182,7 +188,6 @@ class LessonForm extends Component {
     );
   }
 }
-
 const mapStateToProps = (state) => ({
   subjects: state.subjectReducer.subjects,
 });

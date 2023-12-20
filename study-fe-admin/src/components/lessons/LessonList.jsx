@@ -1,16 +1,13 @@
-import React, { Component } from 'react'
-import { Button, Space, Table } from 'antd'
-import Column from 'antd/lib/table/Column'
-import {
-    EditOutlined,
-    DeleteOutlined,
-  } from "@ant-design/icons";
+import React, { Component } from "react";
+import { Button, Space, Table } from "antd";
+import Column from "antd/lib/table/Column";
+import { EditOutlined, DeleteOutlined, EyeOutlined } from "@ant-design/icons";
 
 class LessonList extends Component {
   render() {
-    const {dataSource,onEdit,onDeleteConfirm} = this.props;
+    const { dataSource, onEdit, onDetails, onDeleteConfirm } = this.props;
     return (
-        <>
+      <>
         <Table dataSource={dataSource} size="small" rowKey="id">
           <Column
             title="Mã bài học"
@@ -21,7 +18,7 @@ class LessonList extends Component {
           ></Column>
           <Column
             title="Tên bài học"
-            key="lessonname" 
+            key="lessonname"
             dataIndex="lessonname"
             width={80}
             align="center"
@@ -32,7 +29,11 @@ class LessonList extends Component {
             dataIndex="subject"
             width={80}
             align="center"
-            render={(subject) => (subject ? subject.subjecttitle : 'N/A')}
+            render={(subject) =>
+              subject
+                ? subject.subjecttitle + " " + subject.classInfo.classname
+                : "N/A"
+            }
           ></Column>
           <Column
             title="Tác vụ"
@@ -42,6 +43,15 @@ class LessonList extends Component {
             align="center"
             render={(_, record) => (
               <Space size="middle">
+                <Button
+                  key={record.key}
+                  type="primary"
+                  size="small"
+                  onClick={() => onDetails(record)}
+                >
+                  <EyeOutlined style={{ marginRight: 8 }} />
+                  Xem
+                </Button>
                 <Button
                   key={record.key}
                   type="primary"
@@ -66,8 +76,8 @@ class LessonList extends Component {
           ></Column>
         </Table>
       </>
-    )
+    );
   }
 }
 
-export default LessonList
+export default LessonList;

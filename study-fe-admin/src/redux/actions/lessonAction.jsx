@@ -39,6 +39,7 @@ export const insertLesson = (object) => async (dispatch) => {
         type: COMMON_MESSAGE_SET,
         payload: "Bài học đã được thêm",
       });
+      dispatch(getLessons());
     } else {
       dispatch({
         type: COMMON_ERROR_SET,
@@ -53,7 +54,6 @@ export const insertLesson = (object) => async (dispatch) => {
         ? error.response.data.message
         : error.message,
     });
-    console.log(error);
   }
   dispatch({
     type: COMMON_LOADING_SET,
@@ -196,6 +196,8 @@ export const updateLesson = (object) => async (dispatch) => {
         type: LESSON_SET,
         payload: response.data,
       });
+      console.log("object in data");
+      console.log(response.data);
       dispatch({
         type: LESSON_UPDATE,
         payload: response.data,
@@ -204,13 +206,14 @@ export const updateLesson = (object) => async (dispatch) => {
         type: COMMON_MESSAGE_SET,
         payload: "Bài học đã được sửa",
       });
+      dispatch(getLessons());
     } else {
       dispatch({
         type: COMMON_ERROR_SET,
         payload: response.message,
       });
     }
-    console.log(response);
+   
   } catch (error) {
     dispatch({
       type: COMMON_ERROR_SET,
