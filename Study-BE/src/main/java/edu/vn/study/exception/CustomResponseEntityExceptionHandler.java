@@ -36,4 +36,11 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
 
         return  new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(AccountException.class)
+    public final ResponseEntity<Object> handleLessonException(AccountException ex, WebRequest request){
+        ExceptionResponse exceptionResponse = new ExceptionResponse(ex.getMessage());
+
+        return  new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
+    }
 }

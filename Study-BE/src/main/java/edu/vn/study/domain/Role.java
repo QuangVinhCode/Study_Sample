@@ -1,5 +1,6 @@
 package edu.vn.study.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,5 +25,6 @@ public class Role {
     private String rolename;
 
     @OneToMany(mappedBy = "role")
+    @JsonIgnore
     private List<Account> accounts;
 }

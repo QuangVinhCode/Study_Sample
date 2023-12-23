@@ -103,6 +103,8 @@ public class LessonService {
 
             entity.setLessoncontent(filename);
             dto.setPdfFile(null);
+        }else{
+            entity.setLessoncontent(found.get().getLessoncontent());
         }
 
         return lessonRepository.save(entity);

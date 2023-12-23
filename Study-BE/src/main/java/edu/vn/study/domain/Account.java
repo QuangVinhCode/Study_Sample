@@ -1,5 +1,6 @@
 package edu.vn.study.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,7 +18,7 @@ import java.util.*;
 public class Account {
     @Id
     @Column(name = "id", nullable = false, length = 100)
-    private Long id;
+    private String id;
 
     @Column(name = "username", nullable = false, length = 100)
     private String username;
@@ -43,14 +44,23 @@ public class Account {
     private Role role;
 
     @OneToMany(mappedBy = "giver")
+    @JsonIgnore
     private List<AccountGaveExercise> givenExercises;
 
     @OneToMany(mappedBy = "completer")
+    @JsonIgnore
     private List<AccountCompletedExercise> completedExercises;
 
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Comment> comments;
 
     @OneToMany(mappedBy = "account")
+    @JsonIgnore
     private List<AccountJoinLesson> joinedLessons;
+
+    public void setAccountById(Long roleId) {
+        this.role = new Role();
+        this.role.setId(roleId);
+    }
 }
