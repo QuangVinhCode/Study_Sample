@@ -29,9 +29,8 @@ public class Account {
     @Column(name = "fullname", nullable = false, length = 100)
     private String fullname;
 
-    @Temporal(TemporalType.DATE)
-    @Column(name = "date")
-    private Date date;
+    @Column(name = "date", nullable = false, length = 100)
+    private int date;
 
     @Column(name = "adress", nullable = false, length = 150)
     private String adress;

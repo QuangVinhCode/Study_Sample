@@ -51,7 +51,7 @@ export const insertSubject = (object, navigate) => async (dispatch) => {
     type: COMMON_LOADING_SET,
     payload: false,
   });
-  navigate("/subjects/list");
+  navigate("/dashboard/subjects/list");
 };
 
 export const getSubjects = () => async (dispatch) => {
@@ -213,7 +213,7 @@ export const updateSubject = (id, object, navigate) => async (dispatch) => {
     type: COMMON_LOADING_SET,
     payload: false,
   });
-  navigate("/subjects/list");
+  navigate("/dashboard/subjects/list");
 };
 
 export const clearSubjectState = () => (dispatch) => {

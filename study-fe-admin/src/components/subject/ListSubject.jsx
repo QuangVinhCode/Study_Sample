@@ -41,7 +41,7 @@ class ListSubject extends Component {
 
      const { navigate } = this.props.router;
     console.log("EditSubject is " + object.id);
-     navigate("/subjects/update/" + object.id);
+     navigate("/dashboard/subjects/update/" + object.id);
   };
   deleteSubject = () => {
     this.props.deleteSubject(this.state.object.id); 

@@ -31,6 +31,5 @@ public class AccountGaveExercise {
 
     // Thêm thuộc tính thời gian giao
     @Column(name = "gave_time")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date gaveTime;
+    private String gaveTime;
 }

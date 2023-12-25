@@ -1,5 +1,6 @@
 package edu.vn.study.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -35,9 +36,11 @@ public class Exercise {
     private String correctanswer;
 
     @OneToMany(mappedBy = "exercise")
+    @JsonIgnore
     private List<AccountGaveExercise> givenByAccounts;
 
     @OneToMany(mappedBy = "exercise")
+    @JsonIgnore
     private List<AccountCompletedExercise> completedByAccounts;
 
     @ManyToOne

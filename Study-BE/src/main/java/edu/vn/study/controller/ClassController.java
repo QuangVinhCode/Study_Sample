@@ -64,12 +64,12 @@ public class ClassController {
     }
 
     @GetMapping("/{id}/get")
-    public  ResponseEntity<?> getClasses(@PathVariable("id") Long id){
+    public  ResponseEntity<?> getClass(@PathVariable("id") Long id){
         return new ResponseEntity<>(classService.findById(id),HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteClasses(@PathVariable("id") Long id)
+    public ResponseEntity<?> deleteClass(@PathVariable("id") Long id)
     {
         classService.deleteById(id);
 

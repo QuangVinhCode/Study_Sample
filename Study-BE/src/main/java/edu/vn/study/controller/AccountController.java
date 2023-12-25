@@ -24,7 +24,7 @@ public class AccountController {
     @Autowired
     private MapValidationErrorService mapValidationErrorService;
 
-    @PostMapping("/register")
+    @PostMapping()
     public ResponseEntity<?> registerAccount(@Valid @RequestBody AccountDto dto, BindingResult result) {
         ResponseEntity<?> responseEntity = mapValidationErrorService.mapValidationFields(result);
         if (responseEntity != null) {
@@ -34,19 +34,19 @@ public class AccountController {
         return new ResponseEntity<>(registeredAccount, HttpStatus.CREATED);
     }
 
-    @GetMapping("/all")
+    @GetMapping()
     public ResponseEntity<List<?>> getAllAccounts() {
         List<?> accounts = accountService.findAll();
         return new ResponseEntity<>(accounts, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<?> getAccountById(@PathVariable String id) {
+    @GetMapping("/{id}/get")
+    public ResponseEntity<?> getAccountById(@PathVariable("id") String id) {
         Account account = accountService.findById(id);
         return new ResponseEntity<>(account, HttpStatus.OK);
     }
 
-    @PatchMapping("/{username}/{password}")
+    @PatchMapping("/login/{username}/{password}")
     public ResponseEntity<?> loginAccount(@PathVariable("username") String username,@PathVariable("password") String password) {
 
         Account loggedInAccount = accountService.login(username, password);

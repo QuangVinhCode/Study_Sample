@@ -15,6 +15,11 @@ export const LESSON_DELETE = 'LESSON_DELETE';
 export const LESSON_UPDATE = 'LESSON_UPDATE';
 export const LESSON_STATE_CLEAR = "LESSON_STATE_CLEAR";
 
+export const ACCOUNT_SET = 'ACCOUNT_SET';
+export const ACCOUNTS_SET = 'ACCOUNTS_SET';
+export const LOG_IN = 'LOG_IN';
+export const LOG_OUT = 'LOG_OUT';
+
 export const COMMON_ERROR_SET = 'COMMON_ERROR_SET';
 export const COMMON_MESSAGE_SET = 'COMMON_MESSAGE_SET';
 export const COMMON_LOADING_SET = 'COMMON_LOADING_SET';

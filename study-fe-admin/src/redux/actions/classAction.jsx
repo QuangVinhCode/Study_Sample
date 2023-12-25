@@ -50,7 +50,7 @@ export const insertClass = (object, navigate) => async (dispatch) => {
     type: COMMON_LOADING_SET,
     payload: false,
   });
-  navigate("/classes/list");
+  navigate("/dashboard/classes/list");
 };
 
 export const getClasses = () => async (dispatch) => {
@@ -212,7 +212,7 @@ export const updateClass = (id,object, navigate) => async (dispatch) => {
     type: COMMON_LOADING_SET,
     payload: false,
   });
-  navigate("/classes/list");
+  navigate("/dashboard/classes/list");
 };
 
 export const clearClassState = () => (dispatch) => {

@@ -26,9 +26,18 @@ import { setError, setMessage } from "../redux/actions/commonAction";
 import ListSubject from "../components/subject/ListSubject";
 import AddOrEditSubject from "../components/subject/AddOrEditSubject";
 import ListLessons from "../components/lessons/ListLessons";
+import { LOG_OUT } from "../redux/actions/actionTypes";
 const { Header, Sider, Content } = Layout;
 
 function DashboardPage() {
+  const handleLogout = () => {
+    let sesion = sessionStorage.removeItem("userSession");
+
+    if (!sesion) {
+      navigate("/login");
+      dispatch({ type: LOG_OUT });
+    }
+  };
   const [marginLeft, setMarginLeft] = useState(200);
   const [collapsed, setCollapsed] = useState(false);
 
@@ -48,9 +57,17 @@ function DashboardPage() {
       dispatch(setError(""));
       message.success(err);
     }
+    let sesion = sessionStorage.getItem("userSession");
+    if (!sesion) {
+      navigate("/login");
+    }
   }, [msg, err]);
 
   const siteLayoutStyle = { marginLeft: marginLeft };
+
+  const storedUserSession = sessionStorage.getItem("userSession");
+  const userSession = storedUserSession ? JSON.parse(storedUserSession) : null;
+
   return (
     <Layout>
       <Sider
@@ -79,7 +96,7 @@ function DashboardPage() {
               key: "1",
               icon: <MdOutlineHome />,
               label: "Trang chủ",
-              onClick: () => navigate("/"),
+              onClick: () => navigate("/dashboard/"),
             },
             {
               key: "2",
@@ -90,13 +107,13 @@ function DashboardPage() {
                   key: "21",
                   icon: <MdFormatListBulleted />,
                   label: "Danh sách lớp học",
-                  onClick: () => navigate("/classes/list"),
+                  onClick: () => navigate("/dashboard/classes/list"),
                 },
                 {
                   key: "22",
                   icon: <MdAddCircleOutline />,
                   label: "Thêm lớp học",
-                  onClick: () => navigate("/classes/add"),
+                  onClick: () => navigate("/dashboard/classes/add"),
                 },
               ],
             },
@@ -109,13 +126,13 @@ function DashboardPage() {
                   key: "31",
                   icon: <MdFormatListBulleted />,
                   label: "Danh sách môn học",
-                  onClick: () => navigate("/subjects/list"),
+                  onClick: () => navigate("/dashboard/subjects/list"),
                 },
                 {
                   key: "32",
                   icon: <MdAddCircleOutline />,
                   label: "Thêm môn học",
-                  onClick: () => navigate("/subjects/add"),
+                  onClick: () => navigate("/dashboard/subjects/add"),
                 },
               ],
             },
@@ -123,7 +140,7 @@ function DashboardPage() {
               key: "4",
               icon: <MdOutlinePlayLesson />,
               label: "Bài học",
-              onClick: () => navigate("/lessons/list"),
+              onClick: () => navigate("/dashboard/lessons/list"),
             },
             {
               key: "5",
@@ -180,6 +197,7 @@ function DashboardPage() {
               key: "8",
               icon: <MdLogout />,
               label: "Đăng xuất",
+              onClick: handleLogout,
             },
           ]}
         />
@@ -212,8 +230,8 @@ function DashboardPage() {
             </Col>
             <Col md={6}>
               <div>
-                <Avatar size="default" icon={<UserOutlined />}></Avatar> Lê
-                Quang Vinh
+                <Avatar size="default" icon={<UserOutlined />}></Avatar>
+                {userSession ? userSession.data.fullname : "Null"}
               </div>
             </Col>
           </Row>
@@ -228,7 +246,7 @@ function DashboardPage() {
         >
           <div className="content-panel">
             <Routes>
-              <Route path="/" element={<Home />}></Route>
+              <Route path="/dashboard/" element={<Home />}></Route>
               <Route
                 path="/classes/add"
                 element={<AddOrEditClass key="a" />}
@@ -249,7 +267,6 @@ function DashboardPage() {
               <Route path="/subjects/list" element={<ListSubject />}></Route>
               <Route path="/lessons/list" element={<ListLessons />}></Route>
             </Routes>
-
             <Outlet></Outlet>
           </div>
         </Content>

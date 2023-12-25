@@ -1,0 +1,16 @@
+.center-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.button-container {
+  justify-content: space-between;
+  margin-top: 16px; /* Hoặc điều chỉnh giá trị tùy theo ý muốn của bạn */
+}
+
+/* Hoặc nếu bạn muốn cách nhau hơn, có thể sử dụng margin trực tiếp cho mỗi nút button */
+.button-container button {
+  margin-right: 8px; /* Hoặc điều chỉnh giá trị tùy theo ý muốn của bạn */
+}

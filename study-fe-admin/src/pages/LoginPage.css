@@ -1,0 +1,36 @@
+/* Center the content vertically and horizontally */
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Full height of the viewport */
+  }
+  
+  /* Styling for the logo */
+  .logo {
+    max-width: 100%;
+    height: auto; /* Maintain aspect ratio */
+    margin-bottom: 20px;
+  }
+  
+  /* Styling for the form */
+  .ant-form {
+    border: 2px solid #ddd;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 400px; /* Adjust form size if needed */
+    width: 100%; /* Take full width of the container */
+  }
+  
+  .button-container {
+    justify-content: space-between;
+    margin-top: 16px; /* Hoặc điều chỉnh giá trị tùy theo ý muốn của bạn */
+  }
+  
+  /* Hoặc nếu bạn muốn cách nhau hơn, có thể sử dụng margin trực tiếp cho mỗi nút button */
+  .button-container button {
+    margin-right: 8px; /* Hoặc điều chỉnh giá trị tùy theo ý muốn của bạn */
+  }
+    

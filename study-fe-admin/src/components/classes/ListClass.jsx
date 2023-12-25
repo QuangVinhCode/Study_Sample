@@ -47,7 +47,7 @@ class ListClass extends Component {
 
      const { navigate } = this.props.router;
     console.log("EditClas is " + object.id);
-     navigate("/classes/update/" + object.id);
+     navigate("/dashboard/classes/update/" + object.id);
   };
   deleteClass = () => {
     this.props.deleteClass(this.state.object.id);

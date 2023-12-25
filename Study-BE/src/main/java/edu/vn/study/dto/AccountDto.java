@@ -15,7 +15,7 @@ public class AccountDto implements Serializable {
     String username;
     String password;
     String fullname;
-    Date date;
+    int date;
     String adress;
     int phone_number;
 
