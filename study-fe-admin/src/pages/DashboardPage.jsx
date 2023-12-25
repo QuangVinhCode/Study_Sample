@@ -27,6 +27,8 @@ import ListSubject from "../components/subject/ListSubject";
 import AddOrEditSubject from "../components/subject/AddOrEditSubject";
 import ListLessons from "../components/lessons/ListLessons";
 import { LOG_OUT } from "../redux/actions/actionTypes";
+import ListExercise from "../components/exercises/ListExercise";
+import AddOrEditExercise from "../components/exercises/AddOrEditExercise";
 const { Header, Sider, Content } = Layout;
 
 function DashboardPage() {
@@ -151,11 +153,13 @@ function DashboardPage() {
                   key: "51",
                   icon: <MdFormatListBulleted />,
                   label: "Danh sách bài tập",
+                  onClick: () => navigate("/dashboard/exercises/list"),
                 },
                 {
                   key: "52",
                   icon: <MdAddCircleOutline />,
                   label: "Thêm bài tập",
+                  onClick: () => navigate("/dashboard/exercises/add"),
                 },
               ],
             },
@@ -264,8 +268,17 @@ function DashboardPage() {
                 path="/subjects/update/:id"
                 element={<AddOrEditSubject key="u" />}
               ></Route>
+              <Route
+              path="/exercises/add"
+              element={<AddOrEditExercise key="a" />}
+            ></Route>
+            <Route
+              path="/exercises/update/:id"
+              element={<AddOrEditExercise key="u" />}
+            ></Route>
               <Route path="/subjects/list" element={<ListSubject />}></Route>
               <Route path="/lessons/list" element={<ListLessons />}></Route>
+              <Route path="/exercises/list" element={<ListExercise />}></Route>
             </Routes>
             <Outlet></Outlet>
           </div>

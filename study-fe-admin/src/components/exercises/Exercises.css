@@ -1,0 +1,12 @@
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* 100% chiều cao của viewport */
+  }
+  
+  .form {
+    width: 400px; /* Đặt chiều rộng của form theo mong muốn */
+    /* Thêm các thuộc tính CSS khác cho form của bạn */
+  }
+  

@@ -20,6 +20,11 @@ export const ACCOUNTS_SET = 'ACCOUNTS_SET';
 export const LOG_IN = 'LOG_IN';
 export const LOG_OUT = 'LOG_OUT';
 
+export const EXERCISE_SET = 'EXERCISE_SET';
+export const EXERCISES_SET = 'EXERCISES_SET';
+export const EXERCISE_DELETE = 'EXERCISE_DELETE';
+export const EXERCISE_STATE_CLEAR = "EXERCISE_STATE_CLEAR";
+
 export const COMMON_ERROR_SET = 'COMMON_ERROR_SET';
 export const COMMON_MESSAGE_SET = 'COMMON_MESSAGE_SET';
 export const COMMON_LOADING_SET = 'COMMON_LOADING_SET';
