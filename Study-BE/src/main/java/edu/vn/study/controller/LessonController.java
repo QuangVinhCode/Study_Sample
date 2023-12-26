@@ -110,7 +110,7 @@ public class LessonController {
         dto.setLessonname(createdLesson.getLessonname());
         dto.setLessoncontent(createdLesson.getLessoncontent());
 
-        return new ResponseEntity<>(dto, HttpStatus.CREATED);
+        return new ResponseEntity<>(createdLesson, HttpStatus.CREATED);
     }
     @GetMapping()
     public ResponseEntity<?> getLessons(){

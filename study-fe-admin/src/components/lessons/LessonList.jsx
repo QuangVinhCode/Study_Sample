@@ -31,7 +31,7 @@ class LessonList extends Component {
             align="center"
             render={(subject) =>
               subject
-                ? (subject.subjecttitle)
+                ? subject.subjecttitle + " " + subject.classInfo.classname
                 : "N/A"
             }
           ></Column>

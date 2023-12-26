@@ -84,7 +84,9 @@ public class AccountService {
     }
 
     public Account login(String username,String password) {
-        Optional<Account> found = accountRepository.findByUsernameContainsIgnoreCaseAndPasswordContainsIgnoreCase(username,password);
+        System.out.println("________________");
+        System.out.println(username + password);
+        Optional<Account> found = accountRepository.findByUsernameIgnoreCaseAndPasswordIgnoreCase(username,password);
 
         if (!found.isPresent())
         {
@@ -109,21 +111,7 @@ public class AccountService {
         Role role = roleService.findById(dto.getRole().getId());
         Account entity = new Account();
 
-        Random random = new Random();
-
-        // Tạo ID ngẫu nhiên trong khoảng từ 1 đến 9999
-        int randomId = random.nextInt(9999) + 1;
-
-        // Lấy thời gian hiện tại
-        LocalDateTime currentTime = LocalDateTime.now();
-
-        // Định dạng thời gian với giờ, phút, giây
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
-
-        // Ghép số ngẫu nhiên với thời gian hiện tại
-        String finalId = randomId + currentTime.format(formatter);
-
-        entity.setId(finalId);
+        entity.setId(id);
         entity.setUsername(dto.getUsername());
         entity.setPassword(dto.getPassword());
         entity.setFullname(dto.getFullname());

@@ -49,7 +49,7 @@ public class AccountController {
     @PatchMapping("/login/{username}/{password}")
     public ResponseEntity<?> loginAccount(@PathVariable("username") String username,@PathVariable("password") String password) {
 
-        Account loggedInAccount = accountService.login(username, password);
+        Account loggedInAccount = accountService.login(username,password);
         return new ResponseEntity<>(loggedInAccount, HttpStatus.OK);
     }
 

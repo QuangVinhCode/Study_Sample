@@ -7,7 +7,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface AccountRepository extends JpaRepository<Account, String> {
-    Optional<Account> findByUsernameContainsIgnoreCaseAndPasswordContainsIgnoreCase(String username, String password);
+    Optional<Account> findByUsernameIgnoreCaseAndPasswordIgnoreCase(String username, String password);
+
 
     List<Account> findByUsernameContainsIgnoreCase(String username);
 

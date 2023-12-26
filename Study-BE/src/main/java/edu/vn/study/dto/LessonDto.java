@@ -12,7 +12,7 @@ import java.io.Serializable;
 public class LessonDto implements Serializable {
 
     private Long id;
-    @NotEmpty(message = "Tên bài học không được để trống")
+
     private String lessonname;
 
     private String lessoncontent;

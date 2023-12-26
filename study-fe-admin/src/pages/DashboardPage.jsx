@@ -29,6 +29,8 @@ import ListLessons from "../components/lessons/ListLessons";
 import { LOG_OUT } from "../redux/actions/actionTypes";
 import ListExercise from "../components/exercises/ListExercise";
 import AddOrEditExercise from "../components/exercises/AddOrEditExercise";
+import AccountDetails from "./AccountDetails";
+import EditAccount from "./EditAccount";
 const { Header, Sider, Content } = Layout;
 
 function DashboardPage() {
@@ -39,6 +41,9 @@ function DashboardPage() {
       navigate("/login");
       dispatch({ type: LOG_OUT });
     }
+  };
+  const handleDetailAccount = () => {
+    navigate("/dashboard/account/account_details");
   };
   const [marginLeft, setMarginLeft] = useState(200);
   const [collapsed, setCollapsed] = useState(false);
@@ -232,7 +237,7 @@ function DashboardPage() {
                 }
               )}
             </Col>
-            <Col md={6}>
+            <Col md={6} onClick={handleDetailAccount}>
               <div>
                 <Avatar size="default" icon={<UserOutlined />}></Avatar>
                 {userSession ? userSession.data.fullname : "Null"}
@@ -269,16 +274,24 @@ function DashboardPage() {
                 element={<AddOrEditSubject key="u" />}
               ></Route>
               <Route
-              path="/exercises/add"
-              element={<AddOrEditExercise key="a" />}
-            ></Route>
-            <Route
-              path="/exercises/update/:id"
-              element={<AddOrEditExercise key="u" />}
-            ></Route>
+                path="/exercises/add"
+                element={<AddOrEditExercise key="a" />}
+              ></Route>
+              <Route
+                path="/exercises/update/:id"
+                element={<AddOrEditExercise key="u" />}
+              ></Route>
               <Route path="/subjects/list" element={<ListSubject />}></Route>
               <Route path="/lessons/list" element={<ListLessons />}></Route>
               <Route path="/exercises/list" element={<ListExercise />}></Route>
+              <Route
+                path="/account/account_details"
+                element={<AccountDetails />}
+              ></Route>
+              <Route
+                path="/account/update/"
+                element={<EditAccount />}
+              ></Route>
             </Routes>
             <Outlet></Outlet>
           </div>

@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface AccountGaveExerciseRepository extends JpaRepository<AccountGaveExercise, Long> {
-    Optional<AccountGaveExercise> findByExercise(Exercise exercise);
 
     @Transactional
     void deleteByExercise(Exercise exercise);
