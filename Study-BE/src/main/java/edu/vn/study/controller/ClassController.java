@@ -4,6 +4,7 @@ package edu.vn.study.controller;
 import edu.vn.study.domain.Class;
 import edu.vn.study.dto.ClassDto;
 import edu.vn.study.exception.ClassException;
+import edu.vn.study.repository.SubjectRepository;
 import edu.vn.study.service.ClassService;
 import edu.vn.study.service.MapValidationErrorService;
 import org.springframework.beans.BeanUtils;
@@ -27,6 +28,8 @@ public class ClassController {
 
     @Autowired
     MapValidationErrorService mapValidationErrorService;
+
+
     @PostMapping
     public ResponseEntity<?> createClass(@Valid @RequestBody ClassDto dto, BindingResult result){
 
@@ -71,6 +74,7 @@ public class ClassController {
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteClass(@PathVariable("id") Long id)
     {
+
         classService.deleteById(id);
 
         return  new ResponseEntity<>("Lớp có id " + id + " đã được xóa",HttpStatus.OK);

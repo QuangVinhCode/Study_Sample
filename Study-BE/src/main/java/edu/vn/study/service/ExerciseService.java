@@ -29,12 +29,7 @@ public class ExerciseService {
         if (!foundList.isEmpty()) {
             throw new ExerciseException("Tên bài tập đã tồn tại trong hệ thống");
         }
-        if (!dto.getCorrectanswer().equalsIgnoreCase(dto.getAnswera())
-                && !dto.getCorrectanswer().equalsIgnoreCase(dto.getAnswerb())
-                && !dto.getCorrectanswer().equalsIgnoreCase(dto.getAnswerc())
-                && !dto.getCorrectanswer().equalsIgnoreCase(dto.getAnswerd())) {
-            throw new ExerciseException("Đáp án phải nằm trong câu trả lời");
-        }
+
         Exercise entity = new Exercise();
         entity.setExercisecontent(dto.getExercisecontent());
         entity.setAnswera(dto.getAnswera());
@@ -56,12 +51,7 @@ public class ExerciseService {
         if (!foundList.isPresent()) {
             throw new ExerciseException("Tên bài tập đã tồn tại trong hệ thống");
         }
-        if (!dto.getCorrectanswer().equalsIgnoreCase(dto.getAnswera())
-                && !dto.getCorrectanswer().equalsIgnoreCase(dto.getAnswerb())
-                && !dto.getCorrectanswer().equalsIgnoreCase(dto.getAnswerc())
-                && !dto.getCorrectanswer().equalsIgnoreCase(dto.getAnswerd())) {
-            throw new ExerciseException("Đáp án phải nằm trong câu trả lời");
-        }
+
         Exercise entity = new Exercise();
         entity.setId(dto.getId());
         entity.setExercisecontent(dto.getExercisecontent());
@@ -81,14 +71,26 @@ public class ExerciseService {
     public List<Exercise> findAll() {
         return exerciseRepository.findAll();
     }
+
+
     public Exercise findById(Long id) {
         Optional<Exercise> found = exerciseRepository.findById(id);
 
         if (!found.isPresent())
         {
-            throw new ClassException("exerciseRepository Bài tập có id "+ id + "không tồn tại");
+            throw new ExerciseException("exerciseRepository Bài tập có id "+ id + "không tồn tại");
         }
         return found.get();
+    }
+
+    public List<Exercise> findByLessonId(Long id) {
+        List<Exercise> list = exerciseRepository.findByLesson_Id(id);
+
+        if (list.isEmpty())
+        {
+            throw new ExerciseException("exerciseRepository Bài học có id "+ id + "không tồn tại");
+        }
+        return list;
     }
     public void  deleteById(Long id){
         Exercise existed = findById(id);

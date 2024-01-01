@@ -3,6 +3,7 @@ package edu.vn.study.service;
 import edu.vn.study.domain.Class;
 import edu.vn.study.exception.ClassException;
 import edu.vn.study.repository.ClassRepository;
+import edu.vn.study.repository.SubjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,8 @@ public class ClassService {
     @Autowired
     private ClassRepository classRepository;
 
+    @Autowired
+    SubjectRepository subjectRepository;
     public Class save(Class entity) {
         return classRepository.save(entity);
     }
@@ -51,7 +54,11 @@ public class ClassService {
 
     public void  deleteById(Long id){
         Class existed = findById(id);
-
+        List<?> list = subjectRepository.findByClassInfo_Id(id);
+        if (!list.isEmpty())
+        {
+            throw new ClassException("Lớp có id "+ id + " có tồn tại bài học không thể xoá");
+        }
         classRepository.delete(existed);
     }
 }

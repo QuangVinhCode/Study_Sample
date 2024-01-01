@@ -10,4 +10,7 @@ import java.util.Optional;
 public interface ExerciseRepository extends JpaRepository<Exercise, Long> {
     List<Exercise> findByExercisecontentContainsIgnoreCase(String exercisecontent);
 
+    List<Exercise> findByLesson_Id(Long id);
+
+
 }

@@ -5,6 +5,7 @@ import edu.vn.study.domain.Subject;
 import edu.vn.study.dto.LessonDto;
 import edu.vn.study.exception.ClassException;
 import edu.vn.study.exception.LessonException;
+import edu.vn.study.repository.ExerciseRepository;
 import edu.vn.study.repository.LessonRepository;
 import edu.vn.study.repository.SubjectRepository;
 import lombok.var;
@@ -27,6 +28,9 @@ public class LessonService {
 
     @Autowired
     SubjectService subjectService;
+
+    @Autowired
+    ExerciseRepository exerciseRepository;
     public Lesson save(LessonDto dto) {
         List<?> foundedList = lessonRepository.findByLessonnameContainsIgnoreCase(dto.getLessonname());
 
@@ -69,14 +73,18 @@ public class LessonService {
 
         if (!found.isPresent())
         {
-            throw new ClassException("Bài học có id "+ id + "không tồn tại");
+            throw new LessonException("Bài học có id "+ id + " không tồn tại");
         }
         return found.get();
     }
 
     public void  deleteById(Long id){
         Lesson existed = findById(id);
-
+        List<?> list = exerciseRepository.findByLesson_Id(id);
+        if (!list.isEmpty())
+        {
+            throw new LessonException("Bài học có id "+ id + "có bài tập tồn tại");
+        }
         lessonRepository.delete(existed);
     }
 
@@ -113,4 +121,6 @@ public class LessonService {
     public Page<Lesson> findByName(String name,Pageable pageable){
         return lessonRepository.findByLessonnameContainsIgnoreCase(name,pageable);
     }
+
+
 }

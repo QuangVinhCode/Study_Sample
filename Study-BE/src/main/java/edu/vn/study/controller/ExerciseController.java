@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -63,6 +64,12 @@ public class ExerciseController {
         Exercise exercise = exerciseService.update(id,dto);
 
         return new ResponseEntity<>(exercise, HttpStatus.CREATED);
+    }
+
+    @PatchMapping("/quiz/{id}")
+    public ResponseEntity<?> quiz(@PathVariable("id") Long id){
+
+        return new ResponseEntity<>(exerciseService.findByLessonId(id), HttpStatus.CREATED);
     }
 
     @GetMapping()

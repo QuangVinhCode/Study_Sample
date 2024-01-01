@@ -160,7 +160,7 @@ class AddOrEditExercise extends Component {
                   {
                     required: true,
                     message: "Vui lòng nhập đáp án A",
-                  },           
+                  },
                 ]}
                 style={{ paddingLeft: 20 }}
               >
@@ -213,32 +213,23 @@ class AddOrEditExercise extends Component {
               <Form.Item
                 label="Câu trả lời"
                 name="correctanswer"
-                initialValue={exercise.correctanswer}
+                initialValue={
+                  exercise.correctanswer ? exercise.correctanswer : undefined
+                }
                 rules={[
                   {
                     required: true,
                     message: "Vui lòng nhập đáp án",
                   },
-                  ({ getFieldValue }) => ({
-                    validator(_, value) {
-                      if (
-                        !value ||
-                        getFieldValue("answera") === value ||
-                        getFieldValue("answerb") === value ||
-                        getFieldValue("answerc") === value ||
-                        getFieldValue("answerd") === value
-                      ) {
-                        return Promise.resolve();
-                      }
-                      return Promise.reject(
-                        new Error("Câu trả lời phải nằm trong 4 đáp án")
-                      );
-                    },
-                  }),
                 ]}
                 style={{ paddingLeft: 20 }}
               >
-                <Input></Input>
+                <Select placeholder="Chọn đáp án">
+                  <Option value="answera">Đáp án A</Option>
+                  <Option value="answerb">Đáp án B</Option>
+                  <Option value="answerc">Đáp án C</Option>
+                  <Option value="answerd">Đáp án D</Option>
+                </Select>
               </Form.Item>
               <Form.Item
                 label="Thuộc bài học"

@@ -38,6 +38,7 @@ function LoginPage() {
   };
 
   if (isLoggedIn) {
+    
     return <Navigate to="/dashboard/*" />; // Use Navigate to redirect
   }
 

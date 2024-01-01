@@ -8,4 +8,6 @@ import java.util.List;
 
 public interface ClassRepository extends JpaRepository<Class, Long> {
     List<Class> findByClassnameStartsWith(String classname, Pageable pageable);
+
+
 }

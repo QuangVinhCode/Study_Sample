@@ -36,7 +36,7 @@ class ListSubject extends Component {
     console.log("Will Unmount");
   };
 
-  editClass = (object) => {
+  editSubject = (object) => {
      console.log(object);
 
      const { navigate } = this.props.router;
@@ -121,7 +121,7 @@ class ListSubject extends Component {
                   key={record.key}
                   type="primary"
                   size="small"
-                  onClick={() => this.editClass(record)}
+                  onClick={() => this.editSubject(record)}
                 >
                   <EditOutlined style={{ marginRight: 8 }} />
                   Sửa

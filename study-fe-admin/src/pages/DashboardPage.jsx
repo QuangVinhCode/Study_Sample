@@ -31,6 +31,7 @@ import ListExercise from "../components/exercises/ListExercise";
 import AddOrEditExercise from "../components/exercises/AddOrEditExercise";
 import AccountDetails from "./AccountDetails";
 import EditAccount from "./EditAccount";
+import Quiz from "../components/exercises/Quiz";
 const { Header, Sider, Content } = Layout;
 
 function DashboardPage() {
@@ -281,6 +282,7 @@ function DashboardPage() {
                 path="/exercises/update/:id"
                 element={<AddOrEditExercise key="u" />}
               ></Route>
+              <Route path="/exercises/quiz/:id" element={<Quiz />}></Route>
               <Route path="/subjects/list" element={<ListSubject />}></Route>
               <Route path="/lessons/list" element={<ListLessons />}></Route>
               <Route path="/exercises/list" element={<ListExercise />}></Route>
@@ -288,10 +290,7 @@ function DashboardPage() {
                 path="/account/account_details"
                 element={<AccountDetails />}
               ></Route>
-              <Route
-                path="/account/update/"
-                element={<EditAccount />}
-              ></Route>
+              <Route path="/account/update/" element={<EditAccount />}></Route>
             </Routes>
             <Outlet></Outlet>
           </div>

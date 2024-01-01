@@ -33,7 +33,7 @@ public class AccountService {
     RoleService roleService;
 
     public Account register(AccountDto dto) {
-        List<?> foundList = accountRepository.findByUsernameContainsIgnoreCase(dto.getUsername());
+        List<?> foundList = accountRepository.findByUsernameContains(dto.getUsername());
 
         if (!foundList.isEmpty()) {
             throw new AccountException("Tên tài khoản đã tồn tại trong hệ thống");

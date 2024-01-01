@@ -3,7 +3,9 @@ package edu.vn.study.service;
 import edu.vn.study.domain.Class;
 import edu.vn.study.domain.Subject;
 import edu.vn.study.exception.ClassException;
+import edu.vn.study.exception.ExerciseException;
 import edu.vn.study.repository.ClassRepository;
+import edu.vn.study.repository.LessonRepository;
 import edu.vn.study.repository.SubjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +18,8 @@ public class SubjectService {
     @Autowired
     private SubjectRepository subjectRepository;
 
+    @Autowired
+    private LessonRepository lessonRepository;
     public Subject save(Subject entity) {
         return subjectRepository.save(entity);
     }
@@ -24,7 +28,7 @@ public class SubjectService {
         Optional<Subject> existed = subjectRepository.findById(id);
         if(!existed.isPresent())
         {
-            throw new ClassException("Môn có id " + id + " không tồn tại");
+            throw new ExerciseException("Môn có id " + id + " không tồn tại");
         }
 
         try {
@@ -33,7 +37,7 @@ public class SubjectService {
            return subjectRepository.save(existedSubject);
         }catch (Exception ex)
         {
-            throw new ClassException("Môn muốn cập nhật bị lỗi");
+            throw new ExerciseException("Môn muốn cập nhật bị lỗi");
         }
     }
 
@@ -46,14 +50,18 @@ public class SubjectService {
 
         if (!found.isPresent())
         {
-            throw new ClassException("Môn có id "+ id + "không tồn tại");
+            throw new ExerciseException("Môn có id "+ id + "không tồn tại");
         }
         return found.get();
     }
 
     public void  deleteById(Long id){
         Subject existed = findById(id);
-
+        List<?> list = lessonRepository.findBySubject_Id(id);
+        if (!list.isEmpty())
+        {
+            throw  new ExerciseException("Môn có id "+ id + " có bài học tồn tại");
+        }
         subjectRepository.delete(existed);
     }
 }
