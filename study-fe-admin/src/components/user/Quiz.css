@@ -1,4 +1,6 @@
-
+.question{
+  text-align: center;
+}
 .question-card {
   /* Center the div  */
   margin: 0 auto;

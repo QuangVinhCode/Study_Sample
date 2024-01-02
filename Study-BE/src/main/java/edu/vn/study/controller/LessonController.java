@@ -62,7 +62,7 @@ public class LessonController {
         dto.setId(createdLesson.getId());
         dto.setLessonname(createdLesson.getLessonname());
         dto.setLessoncontent(createdLesson.getLessoncontent());
-        return new ResponseEntity<>(dto, HttpStatus.CREATED);
+        return new ResponseEntity<>(createdLesson, HttpStatus.CREATED);
     }
 
     @GetMapping("/content/{filename:.+}")

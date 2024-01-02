@@ -50,7 +50,7 @@ function Quiz() {
   };
 
   return (
-    <div className="App">
+    <div className="question">
       <h1>Đố vui 📚</h1>
 
       <h2>Tổng điểm: {score}</h2>

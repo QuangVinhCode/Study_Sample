@@ -1,7 +1,5 @@
 import "./DashboardPage.css";
-import {
-  UserOutlined,
-} from "@ant-design/icons";
+import { UserOutlined } from "@ant-design/icons";
 import { AutoComplete, Avatar, Col, Layout, Row, message } from "antd";
 import React, { useEffect, useState } from "react";
 import { Navigate, Outlet, Route, Routes, useNavigate } from "react-router-dom";
@@ -13,6 +11,10 @@ import UserSubject from "../components/user/usersubject";
 import UserLesson from "../components/user/userlesson";
 import UserLessonDetails from "../components/user/userlessondetals";
 import Quiz from "../components/user/Quiz";
+import AccountDetails from "../components/user/AccountDetails";
+import EditAccount from "../components/user/EditAccount";
+import Introdution from "../components/user/Introdution";
+import Contact from "../components/user/Contact";
 const { Header, Content } = Layout;
 
 function User() {
@@ -25,7 +27,16 @@ function User() {
     }
   };
   const handleDetailAccount = () => {
-    navigate("/dashboard/account/account_details");
+    navigate("/user/account/account_details");
+  };
+  const onHome = () => {
+    navigate("/user/*");
+  };
+  const onIntroduction = () => {
+    navigate("/user/introdution");
+  };
+  const onContact = () => {
+    navigate("/user/contact");
   };
 
   const navigate = useNavigate();
@@ -68,24 +79,41 @@ function User() {
           }}
         >
           <Row>
-            <Col md={4}>
+            <Col md={2} style={{ marginLeft: 5 }} onClick={onHome}>
               <div>Trang chủ</div>
             </Col>
-            <Col md={4}>
+            <Col md={2} onClick={onIntroduction}>
               <div>Giới thiệu</div>
             </Col>
-            <Col md={4}>
+            <Col md={2} onClick={onContact}>
               <div>Liên hệ</div>
             </Col>
             <Col
-              md={12}
+              md={10}
               onClick={handleDetailAccount}
-              style={{ position: "absolute", top: 0, right: 5 }}
+              style={{
+                position: "absolute",
+                top: 0,
+                right: 5,
+                cursor: "pointer",
+              }}
             >
               <div>
                 <Avatar size="default" icon={<UserOutlined />}></Avatar>
                 {userSession ? userSession.data.fullname : "Null"}
               </div>
+            </Col>
+            <Col
+              md={2}
+              onClick={handleLogout}
+              style={{
+                position: "absolute",
+                top: 20,
+                right: 5,
+                cursor: "pointer",
+              }}
+            >
+              <span>Đăng xuất</span>
             </Col>
           </Row>
         </Header>
@@ -101,8 +129,18 @@ function User() {
               <Route path="/*" element={<UserClass />}></Route>
               <Route path="/subject/:id" element={<UserSubject />}></Route>
               <Route path="/lesson/:id" element={<UserLesson />}></Route>
-              <Route path="/lessondetails/:id" element={<UserLessonDetails />}></Route>
+              <Route
+                path="/lessondetails/:id"
+                element={<UserLessonDetails />}
+              ></Route>
               <Route path="/quiz/:id" element={<Quiz />}></Route>
+              <Route
+                path="/account/account_details"
+                element={<AccountDetails />}
+              ></Route>
+              <Route path="/account/update/" element={<EditAccount />}></Route>
+              <Route path="/introdution" element={<Introdution />}></Route>
+              <Route path="/contact" element={<Contact />}></Route>
             </Routes>
             <Outlet></Outlet>
           </div>

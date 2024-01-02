@@ -139,7 +139,7 @@ class LessonForm extends Component {
             label="Tên bài học"
             name="lessonname"
             initialValue={lesson.lessonname}
-            rules={[{ required: true, min: 2 }]}
+            rules={[{ required: true, message: "Yêu cầu nhập tên bài học" }]}
           >
             <Input></Input>
           </Form.Item>
@@ -147,6 +147,7 @@ class LessonForm extends Component {
             label="Môn học"
             name="subject_id"
             initialValue={lesson.subject ? lesson.subject.id : undefined}
+            rules={[{ required: true, message: "Yêu cầu chọn môn học" }]}
           >
             <Select onChange={this.handleSubjectChange}>
               {subjects.map((subject) => (
@@ -161,7 +162,7 @@ class LessonForm extends Component {
             name="lessoncontent"
             initialValue={[initialPDF]}
             valuePropName="fileList"
-            rules={[{ required: true }]}
+            rules={[{ required: true, message: "Yêu cầu chọn file pdf" }]}
             getValueFromEvent={this.normFile}
           >
             <Upload       

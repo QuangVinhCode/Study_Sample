@@ -81,7 +81,7 @@ class ListSubject extends Component {
       <>
         <ContentHeader
           navigate={navigate}
-          title="Danh sách lớp học"
+          title="Danh sách môn học"
           className="site-page-header"
         ></ContentHeader>
         <Table dataSource={subjects} size="small" rowKey="id">

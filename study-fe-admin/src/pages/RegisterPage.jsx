@@ -219,6 +219,10 @@ function RegisterPage() {
               required: true,
               message: "Vui lòng nhập số điện thoại!",
             },
+            {
+              pattern: /^[0-9]+$/,
+              message: "Vui lòng chỉ nhập số!",
+            },
           ]}
         >
           <Input />

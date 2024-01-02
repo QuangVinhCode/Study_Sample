@@ -32,11 +32,11 @@ public class LessonService {
     @Autowired
     ExerciseRepository exerciseRepository;
     public Lesson save(LessonDto dto) {
-        List<?> foundedList = lessonRepository.findByLessonnameContainsIgnoreCase(dto.getLessonname());
+        Optional<?> foundedList = lessonRepository.findByLessonnameLikeAndSubject_Id(dto.getLessonname(),dto.getSubject().getId());
 
-        if (foundedList.size() > 0)
+        if (foundedList.isPresent())
         {
-            throw  new LessonException("Bài học đã tồn tại trong hệ thống");
+            throw  new LessonException("Tên bài học đã tồn tại trong hệ thống");
         }
         Subject subject = subjectService.findById(dto.getSubject().getId());
         Lesson entity = new Lesson();
@@ -99,7 +99,12 @@ public class LessonService {
         {
             throw  new LessonException("Không tìm thấy bài học");
         }
+        Optional<?> foundedList = lessonRepository.findByLessonnameLikeAndSubject_Id(dto.getLessonname(),dto.getSubject().getId());
 
+        if (foundedList.isPresent())
+        {
+            throw  new LessonException("Tên bài học đã tồn tại trong hệ thống");
+        }
         Subject subject = subjectService.findById(dto.getSubject().getId());
         Lesson entity = new Lesson();
 
