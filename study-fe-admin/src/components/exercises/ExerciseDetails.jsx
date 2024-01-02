@@ -42,7 +42,12 @@ class ExerciseDetails extends Component {
         </Row>
         <Row>
           <Col md={10}>Câu trả lời</Col>
-          <Col md={10}>{exercise.correctanswer}</Col>
+          <Col md={10}>
+            {exercise.correctanswer === "answera" ? "Đáp án A" : ""}
+            {exercise.correctanswer === "answerb" ? "Đáp án B" : ""}
+            {exercise.correctanswer === "answerc" ? "Đáp án C" : ""}
+            {exercise.correctanswer === "answerd" ? "Đáp án D" : ""}
+          </Col>
         </Row>
       </Modal>
     );

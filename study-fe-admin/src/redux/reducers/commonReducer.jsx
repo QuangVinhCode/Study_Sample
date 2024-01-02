@@ -1,4 +1,8 @@
-import { COMMON_ERROR_SET, COMMON_LOADING_SET, COMMON_MESSAGE_SET } from "../actions/actionTypes";
+import {
+  COMMON_ERROR_SET,
+  COMMON_LOADING_SET,
+  COMMON_MESSAGE_SET,
+} from "../actions/actionTypes";
 
 const initialState = {
   message: "",

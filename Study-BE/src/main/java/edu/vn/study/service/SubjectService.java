@@ -21,16 +21,25 @@ public class SubjectService {
     @Autowired
     private LessonRepository lessonRepository;
     public Subject save(Subject entity) {
+        Optional<Subject> existed_subject_class = subjectRepository.findBySubjecttitleLikeAndClassInfo_Id(entity.getSubjecttitle(),entity.getClassInfo().getId());
+        if(existed_subject_class.isPresent())
+        {
+            throw new ExerciseException("Môn có id " + entity.getSubjecttitle() + " và lớp học "+ entity.getClassInfo().getClassname() + " đã tồn tại trong hệ thống");
+        }
         return subjectRepository.save(entity);
     }
 
     public Subject update(Long id,Subject entity) {
         Optional<Subject> existed = subjectRepository.findById(id);
+        Optional<Subject> existed_subject_class = subjectRepository.findBySubjecttitleLikeAndClassInfo_Id(entity.getSubjecttitle(),entity.getClassInfo().getId());
         if(!existed.isPresent())
         {
             throw new ExerciseException("Môn có id " + id + " không tồn tại");
         }
-
+        if(existed_subject_class.isPresent())
+        {
+            throw new ExerciseException("Môn có id " + entity.getSubjecttitle() + " và lớp học "+ entity.getClassInfo().getClassname() + " đã tồn tại trong hệ thống");
+        }
         try {
             Subject existedSubject = existed.get();
             existedSubject.setSubjecttitle(entity.getSubjecttitle());

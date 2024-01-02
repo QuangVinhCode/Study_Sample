@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
+import withRouter from '../../helpers/withRouter'
 
-export class Home extends Component {
+class Home extends Component {
   render() {
     return (
-      <div>
-      Home
-      </div>
+      <>
+       <h1>Chào mừng người dùng đã đến trang quản trị</h1>
+      </>
     )
   }
 }
 
-export default Home
+export default withRouter(Home)

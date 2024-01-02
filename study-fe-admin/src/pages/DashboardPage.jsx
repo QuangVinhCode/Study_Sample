@@ -17,8 +17,8 @@ import {
   MdOutlinePlayLesson,
   MdSubject,
 } from "react-icons/md";
-import { Outlet, Route, Routes, useNavigate } from "react-router-dom";
-import { Home } from "../components/home/Home";
+import { Navigate, Outlet, Route, Routes, useNavigate } from "react-router-dom";
+import Home from "../components/home/Home";
 import AddOrEditClass from "../components/classes/AddOrEditClass";
 import ListClass from "../components/classes/ListClass";
 import { useDispatch, useSelector } from "react-redux";
@@ -104,7 +104,7 @@ function DashboardPage() {
               key: "1",
               icon: <MdOutlineHome />,
               label: "Trang chủ",
-              onClick: () => navigate("/dashboard/"),
+              onClick: () => navigate("/dashboard/*"),
             },
             {
               key: "2",
@@ -256,7 +256,7 @@ function DashboardPage() {
         >
           <div className="content-panel">
             <Routes>
-              <Route path="/dashboard/" element={<Home />}></Route>
+              <Route path="/*" element={<Home />}></Route>
               <Route
                 path="/classes/add"
                 element={<AddOrEditClass key="a" />}

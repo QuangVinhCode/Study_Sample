@@ -20,8 +20,6 @@ class ListSubject extends Component {
     super();
 
     this.state = {
-     
-
       object: {},
     };
   }
@@ -37,20 +35,20 @@ class ListSubject extends Component {
   };
 
   editSubject = (object) => {
-     console.log(object);
+    console.log(object);
 
-     const { navigate } = this.props.router;
+    const { navigate } = this.props.router;
     console.log("EditSubject is " + object.id);
-     navigate("/dashboard/subjects/update/" + object.id);
+    navigate("/dashboard/subjects/update/" + object.id);
   };
   deleteSubject = () => {
-    this.props.deleteSubject(this.state.object.id); 
+    this.props.deleteSubject(this.state.object.id);
   };
 
   openDeleteConfirmModal = (object) => {
     this.setState({ ...this.state, object: object });
     console.log(object);
-    const message = "Bạn có chắt chắn muốn xóa môn " + object.subjecttitle;
+    const message = "Bạn có chắt chắn muốn xóa môn học " + object.subjecttitle;
 
     Modal.confirm({
       title: "Xác nhận",
@@ -65,14 +63,14 @@ class ListSubject extends Component {
   render() {
     const { navigate } = this.props.router;
     const { subjects, isLoading } = this.props;
-    console.log("object")
+    console.log("object");
     console.log(subjects);
     if (isLoading) {
       return (
         <>
           <ContentHeader
             navigate={navigate}
-            title="Danh sách lớp học"
+            title="Danh sách môn học"
             className="site-page-header"
           ></ContentHeader>
           <Skeleton active />
@@ -107,7 +105,7 @@ class ListSubject extends Component {
             dataIndex="classInfo"
             width={80}
             align="center"
-            render={(classInfo) => (classInfo ? classInfo.classname : 'N/A')}
+            render={(classInfo) => (classInfo ? classInfo.classname : "N/A")}
           ></Column>
           <Column
             title="Tác vụ"

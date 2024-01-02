@@ -20,14 +20,6 @@ class ListClass extends Component {
     super();
 
     this.state = {
-      // dataSource: [
-      //   {id : 1,classname: 'Lớp 1'},
-      //   {id : 2,classname: 'Lớp 2'},
-      //   {id : 3,classname: 'Lớp 3'},
-      //   {id : 4,classname: 'Lớp 4'},
-      //   {id : 5,classname: 'Lớp 5'},
-      // ],
-
       object: {},
     };
   }

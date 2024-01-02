@@ -69,7 +69,7 @@ class AddOrEditSubject extends Component {
     return null;
   }
   confirmUpdate = () => {
-    console.log("Cập nhật  môn học");
+    console.log("Cập nhật môn học");
     this.formRef.current.submit();
   };
 
