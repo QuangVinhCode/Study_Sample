@@ -232,3 +232,39 @@ export const clearSubject = () => (dispatch) => {
     },
   });
 };
+
+export const getSubjectsByClass = (id) => async (dispatch) => {
+  const service = new SubjectService();
+
+  try {
+    console.log("Danh sách môn học");
+    dispatch({
+      type: COMMON_LOADING_SET,
+      payload: true,
+    });
+    const response = await service.getSubjectsByClass(id);
+    console.log(response);
+    if (response.status === 200) {
+      dispatch({
+        type: SUBJECTS_SET,
+        payload: response.data,
+      });
+    } else {
+      dispatch({
+        type: COMMON_ERROR_SET,
+        payload: response.message,
+      });
+    }
+  } catch (error) {
+    dispatch({
+      type: COMMON_ERROR_SET,
+      payload: error.response.data
+        ? error.response.data.message
+        : error.message,
+    });
+  }
+  dispatch({
+    type: COMMON_LOADING_SET,
+    payload: false,
+  });
+};

@@ -10,8 +10,7 @@ import { setError, setMessage } from "../redux/actions/commonAction";
 function LoginPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const isLoggedIn = useSelector((state) => state.accountReducer.isLoggedIn);
-
+ // const isLoggedIn = useSelector((state) => state.accountReducer.isLoggedIn);
   const err = useSelector((state) => state.commonReducer.error);
   const msg = useSelector((state) => state.commonReducer.message);
   useEffect(() => {
@@ -26,7 +25,7 @@ function LoginPage() {
   }, [msg, err]);
   const onFinish = (values) => {
     console.log("Success:", values);
-    dispatch(loginAccount(values));
+    dispatch(loginAccount(values,navigate));
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -37,10 +36,10 @@ function LoginPage() {
     navigate("/register"); // Navigate to the registration page
   };
 
-  if (isLoggedIn) {
-    
-    return <Navigate to="/dashboard/*" />; // Use Navigate to redirect
-  }
+  // if (isLoggedIn) {
+   
+  //   return <Navigate to="/dashboard/*" />; // Use Navigate to redirect
+  // }
 
   return (
     <div className="login-container">

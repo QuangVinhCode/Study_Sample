@@ -17,4 +17,7 @@ export default class ClassService {
   updateExercise = async (id, object) => {
     return await axios.patch(API_EXERCISE + "/" + id, object);
   };
+  getExercisesByLesson = async (id) => {
+    return await axios.patch(API_EXERCISE + "/quiz/" + id);
+  };
 }

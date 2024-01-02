@@ -14,7 +14,7 @@ public interface LessonRepository extends JpaRepository<Lesson, Long> {
 
     List<Lesson> findBySubject_Id(Long id);
 
-    List<Lesson> findBySubject_IdAndSubject_ClassInfo_Id(Long id, Long id1);
+
 
 
 

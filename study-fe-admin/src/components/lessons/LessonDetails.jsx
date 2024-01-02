@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Worker, Viewer } from "@react-pdf-viewer/core";
 import LessonService from "../../services/lessonService";
 import "@react-pdf-viewer/core/lib/styles/index.css";
-import { Button, Modal } from "antd";
+import { Modal } from "antd";
 
 class LessonDetails extends Component {
   render() {

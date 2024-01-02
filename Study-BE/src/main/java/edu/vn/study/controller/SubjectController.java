@@ -98,6 +98,11 @@ public class SubjectController {
     public ResponseEntity<?> getSubjects(){
         return new ResponseEntity<>(subjectService.findAll(),HttpStatus.OK);
     }
+    @PatchMapping("/class/{id}")
+    public ResponseEntity<?> getSubjectsByClass(@PathVariable("id") Long id)
+    {
+        return new ResponseEntity<>(subjectService.findAllByClass(id),HttpStatus.OK);
+    }
 
     @GetMapping("/{id}/get")
     public  ResponseEntity<?> getSubject(@PathVariable("id") Long id){

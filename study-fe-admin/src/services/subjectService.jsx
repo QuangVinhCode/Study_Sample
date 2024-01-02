@@ -17,4 +17,7 @@ export default class ClassService {
   updateSubject = async (id, object) => {
     return await axios.patch(API_SUBJECT + "/" + id, object);
   };
+  getSubjectsByClass = async (id) => {
+    return await axios.patch(API_SUBJECT + "/class/" + id);
+  };
 }

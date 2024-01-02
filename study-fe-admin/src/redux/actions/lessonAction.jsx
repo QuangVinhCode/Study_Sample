@@ -95,7 +95,41 @@ export const getLessons = () => async (dispatch) => {
     payload: false,
   });
 };
+export const getLessonsBySubject = (id) => async (dispatch) => {
+  const service = new LessonService();
 
+  try {
+    console.log("Danh sách bài học");
+    dispatch({
+      type: COMMON_LOADING_SET,
+      payload: true,
+    });
+    const response = await service.getLessonsBySubject(id);
+    console.log(response);
+    if (response.status === 200) {
+      dispatch({
+        type: LESSONS_SET,
+        payload: response.data,
+      });
+    } else {
+      dispatch({
+        type: COMMON_ERROR_SET,
+        payload: response.message,
+      });
+    }
+  } catch (error) {
+    dispatch({
+      type: COMMON_ERROR_SET,
+      payload: error.response.data
+        ? error.response.data.message
+        : error.message,
+    });
+  }
+  dispatch({
+    type: COMMON_LOADING_SET,
+    payload: false,
+  });
+};
 export const getLesson = (id) => async (dispatch) => {
   const service = new LessonService();
 

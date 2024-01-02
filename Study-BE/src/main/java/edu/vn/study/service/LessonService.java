@@ -64,6 +64,10 @@ public class LessonService {
         return lessonRepository.findAll();
     }
 
+    public List<?> findAllBySubject(Long id) {
+        return lessonRepository.findBySubject_Id(id);
+    }
+
     public Page<Lesson> findAll(Pageable pageable){
         return lessonRepository.findAll(pageable);
     }

@@ -54,6 +54,10 @@ public class SubjectService {
         return subjectRepository.findAll();
     }
 
+    public List<Subject> findAllByClass(Long id) {
+        return subjectRepository.findByClassInfo_Id(id);
+    }
+
     public Subject findById(Long id) {
         Optional<Subject> found = subjectRepository.findById(id);
 

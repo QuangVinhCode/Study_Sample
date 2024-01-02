@@ -114,14 +114,12 @@ public class LessonController {
     }
     @GetMapping()
     public ResponseEntity<?> getLessons(){
-//        var list = lessonService.findAll();
-//        var newList =list.stream().map(item -> {
-//            LessonDto dto = new LessonDto();
-//            BeanUtils.copyProperties(item,dto);
-//
-//            return dto;
-//        }).collect(Collectors.toList());
         return new ResponseEntity<>(lessonService.findAll(),HttpStatus.OK);
+    }
+
+    @PatchMapping("/subject/{id}")
+    public ResponseEntity<?> getLessonsBySubject(@PathVariable("id") Long id){
+        return new ResponseEntity<>(lessonService.findAllBySubject(id),HttpStatus.OK);
     }
 
     @GetMapping("/find")

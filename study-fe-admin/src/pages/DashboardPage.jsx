@@ -17,7 +17,7 @@ import {
   MdOutlinePlayLesson,
   MdSubject,
 } from "react-icons/md";
-import { Navigate, Outlet, Route, Routes, useNavigate } from "react-router-dom";
+import { Outlet, Route, Routes, useNavigate } from "react-router-dom";
 import Home from "../components/home/Home";
 import AddOrEditClass from "../components/classes/AddOrEditClass";
 import ListClass from "../components/classes/ListClass";
@@ -31,7 +31,6 @@ import ListExercise from "../components/exercises/ListExercise";
 import AddOrEditExercise from "../components/exercises/AddOrEditExercise";
 import AccountDetails from "./AccountDetails";
 import EditAccount from "./EditAccount";
-import Quiz from "../components/exercises/Quiz";
 const { Header, Sider, Content } = Layout;
 
 function DashboardPage() {
@@ -225,7 +224,7 @@ function DashboardPage() {
           }}
         >
           <Row>
-            <Col md={18}>
+            <Col md={10}>
               {React.createElement(
                 collapsed ? MenuUnfoldOutlined : MenuFoldOutlined,
                 {
@@ -238,7 +237,9 @@ function DashboardPage() {
                 }
               )}
             </Col>
-            <Col md={6} onClick={handleDetailAccount}>
+            <Col md={6} onClick={handleDetailAccount}
+            style={{ position: "absolute", top: 0, right: 5 }}
+            >
               <div>
                 <Avatar size="default" icon={<UserOutlined />}></Avatar>
                 {userSession ? userSession.data.fullname : "Null"}
@@ -282,7 +283,6 @@ function DashboardPage() {
                 path="/exercises/update/:id"
                 element={<AddOrEditExercise key="u" />}
               ></Route>
-              <Route path="/exercises/quiz/:id" element={<Quiz />}></Route>
               <Route path="/subjects/list" element={<ListSubject />}></Route>
               <Route path="/lessons/list" element={<ListLessons />}></Route>
               <Route path="/exercises/list" element={<ListExercise />}></Route>

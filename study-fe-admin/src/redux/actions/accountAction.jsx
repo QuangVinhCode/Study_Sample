@@ -8,7 +8,7 @@ import {
   LOG_OUT,
 } from "./actionTypes";
 
-export const loginAccount = (object) => async (dispatch) => {
+export const loginAccount = (object, navigate) => async (dispatch) => {
   const service = new AccountService();
 
   try {
@@ -31,6 +31,12 @@ export const loginAccount = (object) => async (dispatch) => {
         data: response.data,
       };
       sessionStorage.setItem("userSession", JSON.stringify(userSession));
+      console.log(response.data)
+      if (response.data.role.id === 1) {
+        navigate("/dashboard/*");
+      } else {
+        navigate("/user/*");
+      }
     } else {
       dispatch({
         type: COMMON_ERROR_SET,

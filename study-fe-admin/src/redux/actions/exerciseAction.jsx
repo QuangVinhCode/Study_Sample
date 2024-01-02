@@ -175,7 +175,7 @@ export const getExercise = (id) => async (dispatch) => {
   });
 };
 
-export const updateExercise = (id,object, navigate) => async (dispatch) => {
+export const updateExercise = (id, object, navigate) => async (dispatch) => {
   const service = new ExerciseService();
 
   try {
@@ -186,7 +186,7 @@ export const updateExercise = (id,object, navigate) => async (dispatch) => {
       payload: true,
     });
 
-    const response = await service.updateExercise(id,object);
+    const response = await service.updateExercise(id, object);
 
     if (response.status === 201) {
       dispatch({
@@ -228,4 +228,19 @@ export const clearExercise = () => (dispatch) => {
     type: EXERCISE_SET,
     payload: { id: "", classname: "" },
   });
+};
+
+export const getExercisesByLesson = async (id) => {
+  const service = new ExerciseService();
+  try {
+    const response = await service.getExercisesByLesson(id);
+    console.log("object in response");
+    console.log(response);
+    const data = await response.data;
+    console.log("object in response.json().data");
+    console.log(data);
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
 };
