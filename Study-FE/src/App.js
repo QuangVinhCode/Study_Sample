@@ -6,6 +6,7 @@ import store from "./redux/store";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import User from "./pages/User";
+import Quiz from "./components/user/Quiz";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/dashboard/*" element={<DashboardPage />} />
           <Route path="/user/*" element={<User />} />
+          <Route path="/quiz/:id" element={<Quiz />}></Route>
         </Routes>
       </BrowserRouter>
     </Provider>

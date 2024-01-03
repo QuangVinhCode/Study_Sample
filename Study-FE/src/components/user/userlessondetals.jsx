@@ -18,7 +18,7 @@ class userlessondetals extends Component {
   };
   onPerFom = () => {
     const { navigate } = this.props.router;
-    navigate("/user/quiz/" + this.props.router.params.id);
+    navigate("/quiz/" + this.props.router.params.id);
   };
   render() {
     const { navigate } = this.props.router;

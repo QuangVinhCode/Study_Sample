@@ -134,7 +134,7 @@ function User() {
                 path="/lessondetails/:id"
                 element={<UserLessonDetails />}
               ></Route>
-              <Route path="/quiz/:id" element={<Quiz />}></Route>
+              
               <Route
                 path="/account/account_details"
                 element={<AccountDetails />}

@@ -46,9 +46,25 @@ function Quiz() {
     setShowResults(false);
   };
   const back = () => {
-    navigate("/user/lesson/" + id);
+    navigate("/user/*");
   };
-
+  if (data === undefined) {
+    // Data is still being fetched
+    return (
+      <div className="question">
+        <h1>Chưa cập nhật dữ liệu bài tập...</h1>
+        <button onClick={back} >Quay về</button>
+      </div>
+    );
+  }
+  if (data.length === 0) {
+    return (
+      <div className="question">
+        <h1>Đố vui 📚</h1>
+        <p>Không có bài tập.</p>
+      </div>
+    );
+  }
   return (
     <div className="question">
       <h1>Đố vui 📚</h1>
@@ -75,16 +91,28 @@ function Quiz() {
           </h3>
 
           <ul className="question-ul">
-            <li onClick={() => optionClicked("answera")} className="question-li">
+            <li
+              onClick={() => optionClicked("answera")}
+              className="question-li"
+            >
               {data[currentQuestion] ? data[currentQuestion].answera : ""}
             </li>
-            <li onClick={() => optionClicked("answerb")} className="question-li">
+            <li
+              onClick={() => optionClicked("answerb")}
+              className="question-li"
+            >
               {data[currentQuestion] ? data[currentQuestion].answerb : ""}
             </li>
-            <li onClick={() => optionClicked("answerc")} className="question-li">
+            <li
+              onClick={() => optionClicked("answerc")}
+              className="question-li"
+            >
               {data[currentQuestion] ? data[currentQuestion].answerc : ""}
             </li>
-            <li onClick={() => optionClicked("answerd")} className="question-li">
+            <li
+              onClick={() => optionClicked("answerd")}
+              className="question-li"
+            >
               {data[currentQuestion] ? data[currentQuestion].answerd : ""}
             </li>
           </ul>
