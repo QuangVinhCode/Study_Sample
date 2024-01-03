@@ -1,0 +1,30 @@
+.Home {
+  cursor: pointer;
+}
+.Introduction {
+  cursor: pointer;
+}
+.Contact {
+  cursor: pointer;
+}
+.User:hover {
+  opacity: 80;
+  color: red;
+}
+.Logout:hover {
+  opacity: 80;
+  color: red;
+}
+
+.Home:hover {
+  opacity: 80;
+  color: red;
+}
+.Introduction:hover {
+  opacity: 80;
+  color: red;
+}
+.Contact:hover {
+  opacity: 80;
+  color: red;
+}

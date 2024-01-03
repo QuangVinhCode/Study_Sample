@@ -42,7 +42,10 @@ public class LessonService {
         Lesson entity = new Lesson();
 
         //BeanUtils.copyProperties(dto,entity);
-
+        if (dto.getLessoncontent()==null)
+        {
+            throw  new LessonException("Chưa thêm file pdf");
+        }
         entity.setLessonname(dto.getLessonname());
         entity.setLessoncontent(dto.getLessoncontent());
         entity.setSubject(subject);
