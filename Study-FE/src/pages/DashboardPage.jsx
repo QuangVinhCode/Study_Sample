@@ -70,7 +70,7 @@ function DashboardPage() {
     }
   }, [msg, err]);
 
-  const siteLayoutStyle = { marginLeft: marginLeft };
+  const siteLayoutStyle = { marginLeft: marginLeft};
 
   const storedUserSession = sessionStorage.getItem("userSession");
   const userSession = storedUserSession ? JSON.parse(storedUserSession) : null;
@@ -224,7 +224,7 @@ function DashboardPage() {
           }}
         >
           <Row>
-            <Col md={10}>
+            <Col md={18}>
               {React.createElement(
                 collapsed ? MenuUnfoldOutlined : MenuFoldOutlined,
                 {
@@ -237,8 +237,10 @@ function DashboardPage() {
                 }
               )}
             </Col>
-            <Col md={6} onClick={handleDetailAccount}
-            style={{ position: "absolute", top: 0, right: 5 }}
+            <Col
+              md={6}
+              onClick={handleDetailAccount}
+ 
             >
               <div className="User">
                 <Avatar size="default" icon={<UserOutlined />}></Avatar>
@@ -253,6 +255,7 @@ function DashboardPage() {
             margin: "80px 24px 16px 24px",
             padding: 24,
             minHeight: 280,
+           
           }}
         >
           <div className="content-panel">

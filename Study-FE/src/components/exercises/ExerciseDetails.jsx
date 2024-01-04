@@ -17,7 +17,11 @@ class ExerciseDetails extends Component {
         okButtonProps={{ style: { display: "none" } }}
       >
         <Row>
-          <Col md={10}>Mã bài học</Col>
+          <Col md={10}>Môn học</Col>
+          <Col md={10}>{exercise.lesson.lessonname}</Col>
+        </Row>
+        <Row>
+          <Col md={10}>Mã bài tập</Col>
           <Col md={10}>{exercise.id}</Col>
         </Row>
         <Row>

@@ -1,4 +1,4 @@
-import "./DashboardPage.css";
+
 import { UserOutlined } from "@ant-design/icons";
 import { Avatar, Col, Layout, Row, message } from "antd";
 import React, { useEffect } from "react";
@@ -10,7 +10,6 @@ import UserClass from "../components/user/userclass";
 import UserSubject from "../components/user/usersubject";
 import UserLesson from "../components/user/userlesson";
 import UserLessonDetails from "../components/user/userlessondetals";
-import Quiz from "../components/user/Quiz";
 import AccountDetails from "../components/user/AccountDetails";
 import EditAccount from "../components/user/EditAccount";
 import Introdution from "../components/user/Introdution";
@@ -125,26 +124,24 @@ function User() {
             padding: 24,
           }}
         >
-          <div className="content-panel" style={{ overflowY: "auto" }}>
-            <Routes>
-              <Route path="/*" element={<UserClass />}></Route>
-              <Route path="/subject/:id" element={<UserSubject />}></Route>
-              <Route path="/lesson/:id" element={<UserLesson />}></Route>
-              <Route
-                path="/lessondetails/:id"
-                element={<UserLessonDetails />}
-              ></Route>
-              
-              <Route
-                path="/account/account_details"
-                element={<AccountDetails />}
-              ></Route>
-              <Route path="/account/update/" element={<EditAccount />}></Route>
-              <Route path="/introdution" element={<Introdution />}></Route>
-              <Route path="/contact" element={<Contact />}></Route>
-            </Routes>
-            <Outlet></Outlet>
-          </div>
+          <Routes>
+            <Route path="/*" element={<UserClass />}></Route>
+            <Route path="/subject/:id" element={<UserSubject />}></Route>
+            <Route path="/lesson/:id" element={<UserLesson />}></Route>
+            <Route
+              path="/lessondetails/:id"
+              element={<UserLessonDetails />}
+            ></Route>
+
+            <Route
+              path="/account/account_details"
+              element={<AccountDetails />}
+            ></Route>
+            <Route path="/account/update/" element={<EditAccount />}></Route>
+            <Route path="/introdution" element={<Introdution />}></Route>
+            <Route path="/contact" element={<Contact />}></Route>
+          </Routes>
+          <Outlet></Outlet>
         </Content>
       </Layout>
     </Layout>

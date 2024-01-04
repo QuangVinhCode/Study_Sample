@@ -117,6 +117,7 @@ class LessonForm extends Component {
               console.log("-------object in values form--------");
               console.log(values);
               onCreate(values);
+              
             })
             .catch((info) => {
               console.log("Validate Failed:", info);

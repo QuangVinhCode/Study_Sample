@@ -37,14 +37,17 @@ class ListLessons extends Component {
   onCreate = (values) => {
     console.log("object");
     console.log(values);
-    if (values.id)
-    {
+    if (values.id) {
       this.props.updateLesson(values);
-    }else{
+    } else {
       this.props.insertLesson(values);
     }
-   
-    this.setState({...this.state,lesson: {},open:false});
+
+    this.setState({
+      ...this.state,
+      lesson: {},
+      open: false,
+    });
   };
 
   deleteLesson = () => {
@@ -67,16 +70,18 @@ class ListLessons extends Component {
     });
   };
   onEdit = (value) => {
-    this.setState({ ...this.state, lesson: value,open:true });
+    this.setState({ ...this.state, lesson: value, open: true });
   };
   onDetails = (value) => {
-    this.setState({ ...this.state, lesson: value ,details: true});
-  }
+    this.setState({ ...this.state, lesson: value, details: true });
+  };
   render() {
     const { navigate } = this.props.router;
     const { open } = this.state;
     const { details } = this.state;
     const { lessons } = this.props;
+    const { lesson } = this.state;
+    console.log(lesson);
     return (
       <>
         <ContentHeader
@@ -108,9 +113,8 @@ class ListLessons extends Component {
             lesson={this.state.lesson}
             open={details}
             onCancel={() => {
-            this.setState({ ...this.state,lesson: {}, details: false });
-            
-          }}
+              this.setState({ ...this.state, lesson: {}, details: false });
+            }}
           />
         )}
         <LessonForm
@@ -118,8 +122,7 @@ class ListLessons extends Component {
           open={open}
           onCreate={this.onCreate}
           onCancel={() => {
-            this.setState({ ...this.state,lesson: {}, open: false });
-            
+            this.setState({ ...this.state, lesson: {}, open: false });
           }}
         />
       </>
