@@ -104,10 +104,7 @@ public class LessonService {
         }
         Optional<?> foundedList = lessonRepository.findByLessonnameLikeAndSubject_Id(dto.getLessonname(),dto.getSubject().getId());
 
-        if (foundedList.isPresent())
-        {
-            throw  new LessonException("Tên bài học đã tồn tại trong hệ thống");
-        }
+
         Subject subject = subjectService.findById(dto.getSubject().getId());
         Lesson entity = new Lesson();
 
@@ -116,7 +113,13 @@ public class LessonService {
         entity.setLessonname(dto.getLessonname());
         entity.setLessoncontent(dto.getLessoncontent());
         entity.setSubject(subject);
-
+        if (foundedList.isPresent()
+                && found.get().getSubject().getId() == dto.getSubject().getId()
+                && found.get().getLessonname()==dto.getLessonname()
+                &&found.get().getLessoncontent()==dto.getLessoncontent() )
+        {
+            throw  new LessonException("Tên bài học đã tồn tại trong hệ thống");
+        }
         if (dto.getPdfFile() != null)
         {
             String filename = fileStorageService.storePDFFile(dto.getPdfFile());
