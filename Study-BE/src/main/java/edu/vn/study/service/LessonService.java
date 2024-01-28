@@ -102,7 +102,7 @@ public class LessonService {
         {
             throw  new LessonException("Không tìm thấy bài học");
         }
-        Optional<?> foundedList = lessonRepository.findByLessonnameLikeAndSubject_Id(dto.getLessonname(),dto.getSubject().getId());
+
 
 
         Subject subject = subjectService.findById(dto.getSubject().getId());
@@ -113,10 +113,10 @@ public class LessonService {
         entity.setLessonname(dto.getLessonname());
         entity.setLessoncontent(dto.getLessoncontent());
         entity.setSubject(subject);
-        if (foundedList.isPresent()
-                && found.get().getSubject().getId() == dto.getSubject().getId()
-                && found.get().getLessonname()==dto.getLessonname()
-                &&found.get().getLessoncontent()==dto.getLessoncontent() )
+
+        Optional<?> foundedList = lessonRepository.findByLessonnameAndIdNot(entity.getLessonname(),entity.getId());
+        System.out.println(foundedList.getClass().toString());
+        if (foundedList.isPresent())
         {
             throw  new LessonException("Tên bài học đã tồn tại trong hệ thống");
         }
