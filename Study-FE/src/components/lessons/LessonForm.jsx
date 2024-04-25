@@ -47,6 +47,7 @@ class LessonForm extends Component {
   handlePreview = (file) => {
     console.log("object in before file pdf");
     console.log(file);
+    console.log(file.thumbUrl);
     if (file.thumbUrl) {
       this.setState({
         ...this.state,

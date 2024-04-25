@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin
 @RequestMapping("/api/v1/subjects")
 public class SubjectController {
     @Autowired

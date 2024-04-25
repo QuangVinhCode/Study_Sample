@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin
 @RequestMapping("/api/v1/classes")
 public class ClassController {
     @Autowired
